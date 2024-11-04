@@ -10,4 +10,6 @@ import sof003.elokuvaprojekti.elokuvaprojekti_sara.domain.Review;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     // Tarvittaessa kustomoituja hakuja, esim. arvosteluja elokuvan ID:n perusteella
     List<Review> findByMovieId(Long movieId);
+
+    List<Review> findByUserId(Long userId);
 }
