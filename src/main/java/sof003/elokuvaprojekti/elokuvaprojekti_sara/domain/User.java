@@ -5,6 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
+
+@Table(name = "app_user")
 @Entity
 public class User {
 
