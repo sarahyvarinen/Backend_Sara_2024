@@ -5,9 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
-
-@Table(name = "app_user")
 @Entity
+@Table(name = "app_user")  // Taulun nimen vaihtaminen
 public class User {
 
     @Id
@@ -18,8 +17,11 @@ public class User {
     private String password;
     private String role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
+
+    // Oletuskonstruktori JPA:lle
+    public User() {}
 
     public User(Long id, String username, String password, String role, List<Review> reviews) {
         this.id = id;
@@ -29,6 +31,7 @@ public class User {
         this.reviews = reviews;
     }
 
+    // Getterit ja setterit
     public Long getId() {
         return id;
     }
@@ -68,5 +71,4 @@ public class User {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
-    
 }

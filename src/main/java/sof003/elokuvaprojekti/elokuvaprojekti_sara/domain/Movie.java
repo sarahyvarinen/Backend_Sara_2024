@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 public class Movie {
 
@@ -16,16 +15,21 @@ public class Movie {
     private int releaseYear;
     private String description;
     private double rating;
+    private String director; // Lisätty kenttä
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-     private List<Review> reviews = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 
-    public Movie(Long id, String title, int releaseYear, String description, double rating, List<Review> reviews) {
+    public Movie() {
+    }
+
+    public Movie(Long id, String title, int releaseYear, String description, double rating, String director, List<Review> reviews) {
         this.id = id;
         this.title = title;
         this.releaseYear = releaseYear;
         this.description = description;
         this.rating = rating;
+        this.director = director;
         this.reviews = reviews;
     }
 
@@ -69,6 +73,14 @@ public class Movie {
         this.rating = rating;
     }
 
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
     public List<Review> getReviews() {
         return reviews;
     }
@@ -76,5 +88,4 @@ public class Movie {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
-
 }
