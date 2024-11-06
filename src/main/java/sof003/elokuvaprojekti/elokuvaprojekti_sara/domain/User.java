@@ -2,11 +2,10 @@ package sof003.elokuvaprojekti.elokuvaprojekti_sara.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "app_user")  // Taulun nimen vaihtaminen
+@Table(name = "app_user")
 public class User {
 
     @Id
@@ -23,52 +22,62 @@ public class User {
     // Oletuskonstruktori JPA:lle
     public User() {}
 
-    public User(Long id, String username, String password, String role, List<Review> reviews) {
-        this.id = id;
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.reviews = reviews;
     }
 
-    // Getterit ja setterit
+    // Getterit
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void addReview(Review review) {
+        reviews.add(review);
+        review.setUser(this); // Varmistaa, että Review tietää käyttäjän
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+        review.setUser(null); // Poistaa viittauksen käyttäjään
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    // Setterit
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Movie</title>
+</head>
+<body>
+    <h1>Add Movie</h1>
+    <form th:action="@{/movies/add-movie}" th:object="${movie}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" th:field="*{title}" id="title" required="required"/>
+
+        <label for="director">Director:</label>
+        <input type="text" th:field="*{director}" id="director" required="required"/>
+
+        <label for="year">Year:</label>
+        <input type="text" th:field="*{year}" id="year" required="required"/>
+
+        <button type="submit">Add Movie</button>
+    </form>
+</body>
+</html>

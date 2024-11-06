@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Review</title>
+</head>
+<body>
+    <h2>Add a Review for Movie ID: <span th:text="${movieId}"></span></h2>
+    <form th:action="@{/reviews/add}" th:object="${review}" method="post">
+        <label for="movie">Movie:</label>
+        <select id="movie" th:field="*{movie}" required>
+            <option value="" disabled selected>Select a movie</option>
+            <option th:each="movie : ${movies}" 
+                    th:value="${movie.id}" 
+                    th:text="${movie.title}"></option>
+        </select>
+
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" th:field="*{rating}" placeholder="Arvostele yhdestä viiteen" min="1" max="5" required />
+
+        <label for="comment">Comment:</label>
+        <textarea id="comment" th:field="*{comment}" placeholder="Kirjoita arvostelusi tänne" required></textarea>
+
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>

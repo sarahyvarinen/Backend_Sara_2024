@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Arvostelut</title>
+</head>
+<body>
+    <h1>Arvostelut</h1>
+    <a href="/reviews/add">Lisää uusi arvio</a>
+    <ul>
+        <li th:each="review : ${reviews}">
+            <span th:text="${review.comment}"></span> - <span th:text="${review.rating}"></span>
+            <a th:href="@{/reviews/delete/{id}(id=${review.id})}">Poista</a>
+        </li>
+    </ul>
+</body>
+</html>
+
+
+

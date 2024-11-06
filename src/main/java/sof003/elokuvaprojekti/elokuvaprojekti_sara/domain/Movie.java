@@ -15,23 +15,25 @@ public class Movie {
     private int releaseYear;
     private String description;
     private double rating;
-    private String director; // Lisätty kenttä
+    private String director;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
+    // Oletuskonstruktori
     public Movie() {
     }
 
-    public Movie(Long id, String title, int releaseYear, String description, double rating, String director, List<Review> reviews) {
-        this.id = id;
+    // Mukautettu konstruktori
+    public Movie(String title, String description, int releaseYear, String director, double rating) {
         this.title = title;
-        this.releaseYear = releaseYear;
         this.description = description;
-        this.rating = rating;
+        this.releaseYear = releaseYear;
         this.director = director;
-        this.reviews = reviews;
+        this.rating = rating;
     }
+
+    // Getterit ja setterit
 
     public Long getId() {
         return id;

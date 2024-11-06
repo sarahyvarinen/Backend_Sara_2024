@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <h1>Movies</h1>
+            <!-- Painike uuden elokuvan lisäämistä varten -->
+            <a th:href="@{/movies/add}" class="btn btn-success">Lisää uusi elokuva</a>
+        </div>
+
+        <!-- Tarkistetaan onko listassa elokuvia -->
+        <div th:if="${movies.isEmpty()}">
+            <p>Elokuvalista on tyhjä, kirjaudu sisään ja lisää uusi elokuva.</p>
+        </div>
+
+        <!-- Elokuvat listataan taulukkoon -->
+        <table class="table table-bordered" th:if="${!movies.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Release Year</th>
+                    <th>Description</th>
+                    <th>Average Rating</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.title}">Title</td>
+                    <td th:text="${movie.releaseYear}">Release Year</td>
+                    <td th:text="${movie.description}">Description</td>
+                    <td th:text="${movie.rating}">Rating</td>
+                    <td>
+                        <a th:href="@{/movies/{id}(id=${movie.id})}" class="btn btn-primary">View Details</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
