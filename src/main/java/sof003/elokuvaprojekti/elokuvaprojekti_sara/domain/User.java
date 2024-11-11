@@ -80,4 +80,9 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getRoles() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRoles'");
+    }
 }
