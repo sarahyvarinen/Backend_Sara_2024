@@ -1,14 +1,15 @@
 package sof003.elokuvaprojekti.elokuvaprojekti_sara;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import sof003.elokuvaprojekti.elokuvaprojekti_sara.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -34,12 +35,18 @@ public class SecurityConfig {
                 formLogin
                     .loginPage("/login")  // Määritellään kirjautumissivun URL
                     .permitAll()          // Sallitaan kaikille pääsy
-            )
+                    .defaultSuccessUrl("/studentlist", true)
+                    )
             .logout(logout -> 
                 logout
                     .permitAll()          // Sallitaan kaikille pääsy uloskirjautumiseen
             );
         return http.build();
+    }
+
+ @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
