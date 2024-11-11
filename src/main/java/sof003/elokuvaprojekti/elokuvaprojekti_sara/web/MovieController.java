@@ -20,14 +20,14 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     // Näyttää lomakkeen elokuvan lisäämistä varten
-    @GetMapping("/add-movie")
+    @GetMapping("/add")
     public String showAddMovieForm(Model model) {
         model.addAttribute("movie", new Movie());
         return "add-movie"; // Varmista, että tämä on oikea näkymän nimi
     }
 
     // Käsittelee elokuvan lisäämistä Thymeleaf-lomakkeen kautta
-    @PostMapping("/add-movie")
+    @PostMapping("/add")
     public String addMovieFromForm(Movie movie) {
         movieRepository.save(movie);
         return "redirect:/movies"; // Suuntaa takaisin elokuvien listalle
@@ -42,10 +42,9 @@ public class MovieController {
     }
 
     // Elokuvan poistaminen
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteMovie(@PathVariable Long id) {
         movieRepository.deleteById(id);
         return "redirect:/movies"; // Ohjaa takaisin elokuvien listalle
     }
 }
-

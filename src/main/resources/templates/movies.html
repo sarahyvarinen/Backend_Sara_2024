@@ -26,7 +26,7 @@
                     <th>Release Year</th>
                     <th>Description</th>
                     <th>Average Rating</th>
-                    <th>Details</th>
+                    <th>Actions</th> <!-- Lisätty Actions-sarake -->
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +36,10 @@
                     <td th:text="${movie.description}">Description</td>
                     <td th:text="${movie.rating}">Rating</td>
                     <td>
-                        <a th:href="@{/movies/{id}(id=${movie.id})}" class="btn btn-primary">View Details</a>
+                        <!-- Delete-painike -->
+                        <form th:action="@{/movies/delete/{id}(id=${movie.id})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
