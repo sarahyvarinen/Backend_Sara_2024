@@ -1,8 +1,8 @@
 package sof003.elokuvaprojekti.elokuvaprojekti_sara.domain;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "app_user")
@@ -82,7 +82,7 @@ public class User {
     }
 
     public String getRoles() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRoles'");
+        // Palauttaa roolit
+        return role;
     }
 }

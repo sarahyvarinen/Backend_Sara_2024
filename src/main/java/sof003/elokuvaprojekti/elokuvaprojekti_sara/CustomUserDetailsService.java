@@ -18,14 +18,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Hae käyttäjä tietokannasta
         sof003.elokuvaprojekti.elokuvaprojekti_sara.domain.User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
-        // Muunna User-entiteetti UserDetails-objektiksi
         return User.withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRoles().split(",")) // Oletetaan, että roolit on tallennettu pilkulla eroteltuna
+                .roles(user.getRole().split(",")) // Oletetaan, että roolit on tallennettu pilkulla eroteltuna
                 .build();
     }
 }

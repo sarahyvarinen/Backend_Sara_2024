@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -35,7 +36,7 @@ public class SecurityConfig {
                 formLogin
                     .loginPage("/login")  // Määritellään kirjautumissivun URL
                     .permitAll()          // Sallitaan kaikille pääsy
-                    .defaultSuccessUrl("/studentlist", true)
+                    .defaultSuccessUrl("/movies", true)
                     )
             .logout(logout -> 
                 logout
@@ -44,7 +45,7 @@ public class SecurityConfig {
         return http.build();
     }
 
- @Autowired
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
@@ -57,5 +58,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 }

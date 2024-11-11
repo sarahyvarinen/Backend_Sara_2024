@@ -41,10 +41,10 @@ public class MovieController {
         return "movies"; // Tämä on Thymeleaf-sivu, joka näyttää elokuvat
     }
 
-    // Elokuvan poistaminen
-    @DeleteMapping("/delete/{id}")
-    public String deleteMovie(@PathVariable Long id) {
-        movieRepository.deleteById(id);
-        return "redirect:/movies"; // Ohjaa takaisin elokuvien listalle
-    }
+    // Elokuvan poistaminen (muutettu PostMappingiksi)
+@PostMapping("/delete/{id}")
+public String deleteMovie(@PathVariable Long id) {
+    movieRepository.deleteById(id);
+    return "redirect:/movies"; // Ohjaa takaisin elokuvien listalle
+}
 }

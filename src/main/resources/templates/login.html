@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Kirjaudu sisään</title>
 </head>
 <body>
-    <h2>Kirjaudu sisään</h2>
-    <form action="/login" method="post">
+    <h1>Kirjaudu sisään</h1>
+    <form action="#" th:action="@{/login}" method="post">
         <div>
             <label for="username">Käyttäjätunnus:</label>
             <input type="text" id="username" name="username" required>
@@ -18,14 +18,8 @@
         <div>
             <button type="submit">Kirjaudu</button>
         </div>
-
-        <!-- Virheiden näyttäminen -->
         <div th:if="${param.error}">
-            <p style="color:red;">Virheellinen käyttäjätunnus tai salasana.</p>
-        </div>
-
-        <div th:if="${param.accessDenied}">
-            <p style="color:red;">Ei oikeuksia tälle sivulle.</p>
+            <p>Virheellinen käyttäjätunnus tai salasana</p>
         </div>
     </form>
 </body>

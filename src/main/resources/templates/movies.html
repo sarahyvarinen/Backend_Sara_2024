@@ -37,13 +37,24 @@
                     <td th:text="${movie.rating}">Rating</td>
                     <td>
                         <!-- Delete-painike -->
-                        <form th:action="@{/movies/delete/{id}(id=${movie.id})}" method="post">
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <form id="deleteForm" th:action="@{/movies/delete/{id}(id=${movie.id})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="deleteMovie(event)">Delete</button>
                         </form>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <script>
+        function deleteMovie(event) {
+            // Estää lomakkeen oletustoiminnon (lähetyksen)
+            event.preventDefault();
+            if (confirm("Oletko varma, että haluat poistaa tämän elokuvan?")) {
+                // Lähettää POST-pyynnön poistaakseen elokuvan
+                event.target.closest('form').submit();
+            }
+        }
+    </script>
 </body>
 </html>
