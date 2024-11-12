@@ -77,7 +77,7 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "id=" + id +
-                ", movie=" + movie.getId() + // Voit halutessasi näyttää lisää elokuvan tietoja
+                ", movie=" + movie.getId() + // Lisää tietoja
                 ", user=" + (user != null ? user.getUsername() : "N/A") + // Käyttäjänimi, jos käyttäjä on saatavilla
                 ", rating=" + rating +
                 ", comment='" + comment + '\'' +

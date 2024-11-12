@@ -23,7 +23,7 @@ public class MovieController {
     @GetMapping("/add")
     public String showAddMovieForm(Model model) {
         model.addAttribute("movie", new Movie());
-        return "add-movie"; // Varmista, että tämä on oikea näkymän nimi
+        return "add-movie"; 
     }
 
     // Käsittelee elokuvan lisäämistä Thymeleaf-lomakkeen kautta

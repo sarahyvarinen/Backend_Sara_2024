@@ -16,7 +16,7 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)  // Tämä sallii @PreAuthorize käytön
+@EnableGlobalMethodSecurity(prePostEnabled = true)  // Sallii @PreAuthorize käytön
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
