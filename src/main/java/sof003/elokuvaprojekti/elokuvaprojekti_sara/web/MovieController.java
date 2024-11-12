@@ -1,8 +1,8 @@
 package sof003.elokuvaprojekti.elokuvaprojekti_sara.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,10 +41,11 @@ public class MovieController {
         return "movies"; // Tämä on Thymeleaf-sivu, joka näyttää elokuvat
     }
 
-    // Elokuvan poistaminen (muutettu PostMappingiksi)
-@PostMapping("/delete/{id}")
-public String deleteMovie(@PathVariable Long id) {
-    movieRepository.deleteById(id);
-    return "redirect:/movies"; // Ohjaa takaisin elokuvien listalle
-}
+    // Elokuvan poistaminen, vain adminille
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/delete/{id}")
+    public String deleteMovie(@PathVariable Long id) {
+        movieRepository.deleteById(id);
+        return "redirect:/movies"; // Ohjaa takaisin elokuvien listalle
+    }
 }
